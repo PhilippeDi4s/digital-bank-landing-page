@@ -30,9 +30,43 @@
           id="logoImage"
         />
       </a>
-      <button type="button" class="default-btn menu">
-        <img src="./images/icon-hamburger.svg" alt="Menu" />
+      <button type="button" class="default-btn header-menu__btn hidden-lg">
+        <svg
+          class="header-menu__icon"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          aria-label="Menu"
+        >
+          <path
+            d="M2 8h20M2 12h20M2 16h20"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+          />
+        </svg>
       </button>
+
+      <nav class="header-menu__nav" id="headerMenu">
+        <ul class="header-menu__list default-list">
+          <li class="header-menu__item">
+            <a href="#" class="header-menu__link default-link">Home</a>
+          </li>
+          <li class="header-menu__item">
+            <a href="#" class="header-menu__link default-link">About</a>
+          </li>
+          <li class="header-menu__item">
+            <a href="#" class="header-menu__link default-link">Contact</a>
+          </li>
+          <li class="header-menu__item">
+            <a href="#" class="header-menu__link default-link">Blog</a>
+          </li>
+          <li class="header-menu__item">
+            <a href="#" class="header-menu__link default-link">Careers</a>
+          </li>
+        </ul>
+      </nav>
+      <button class="default-btn gradient-btn show-lg">Request Invite</button>
     </header>
 
     <main class="main_container">
@@ -51,14 +85,16 @@
         </article>
       </section>
 
-      <section class="odd_section default_section">
-        <article class="content-block">
+      <section class="odd_section default_section benefits-section">
+        <article class="content-block" id="benefits-section_introduction">
           <h2 class="heading heading-lg">Why choose Digitalbank?</h2>
           <p class="default-text">
             We leverage Open Banking to turn your bank account into your
-            financial hub. Control your finances like never before.
+            financial hub. <br />
+            Control your finances like never before.
           </p>
         </article>
+        <div class="show-lg"></div>
 
         <article class="content-block">
           <img
@@ -66,7 +102,7 @@
             alt="Online Banking"
             class="default-icon"
           />
-          <h3 class="heading heading-md">Why choose Digitalbank?</h3>
+          <h3 class="heading heading-md">Online Banking</h3>
           <p class="default-text">
             Our modern web and mobile applications allow you to keep track of
             your finances wherever you are in the world.
@@ -113,108 +149,129 @@
         </article>
       </section>
       <section class="even_section default_section">
-        <h2 class="heading heading-md">Latest Articles</h2>
+        <h2 class="heading heading-lg text-center">Latest Articles</h2>
+
         <div class="content-block articles-wrapper">
-          <article class="article-container">
+          <a href="#" class="article-container default-link">
             <img src="./images/image-currency.jpg" alt="Image Currency" />
-            <span class="default-text text-sm">By Claire Robinson</span>
-            <h4 class="heading heading-sm">
-              Receive money in any currency with no fees
-            </h4>
-            <p class="default-text">
-              The world is getting smaller and we’re becoming more mobile. So
-              why should you be forced to only receive money in a single …
-            </p>
-          </article>
+            <div class="article-content">
+              <span class="default-text text-sm">By Claire Robinson</span>
+              <h4 class="heading heading-sm">
+                Receive money in any currency with no fees
+              </h4>
+              <p class="default-text">
+                The world is getting smaller and we’re becoming more mobile. So
+                why should you be forced to only receive money in a single
+              </p>
+            </div>
+          </a>
 
-          <article class="article-container">
+          <a href="#" class="default-link article-container">
             <img src="./images/image-restaurant.jpg" alt="Image Restaurant" />
-            <span class="default-text text-sm">By Wilson Hutton</span>
-            <h4 class="heading heading-sm">
-              Treat yourself without worrying about money
-            </h4>
-            <p class="default-text">
-              Our simple budgeting feature allows you to separate out your
-              spending and set realistic limits each month. That means you …
-            </p>
-          </article>
+            <div class="article-content">
+              <span class="default-text text-sm">By Wilson Hutton</span>
+              <h4 class="heading heading-sm">
+                Treat yourself without worrying about money
+              </h4>
+              <p class="default-text">
+                Our simple budgeting feature allows you to separate out your
+                spending and set realistic limits each month. That means you
+              </p>
+            </div>
+          </a>
 
-          <article class="article-container">
+          <a href="#" class="article-container default-link">
             <img src="./images/image-plane.jpg" alt="Image Plane" />
-            <span class="default-text text-sm">By Wilson Hutton</span>
-            <h4 class="heading heading-sm">
-              Take your Digitalbank card wherever you go
-            </h4>
-            <p class="default-text">
-              We want you to enjoy your travels. This is why we don’t charge any
-              fees on purchases while you’re abroad. We’ll even show you …
-            </p>
-          </article>
+            <div class="article-content">
+              <span class="default-text text-sm">By Wilson Hutton</span>
+              <h4 class="heading heading-sm">
+                Take your Digitalbank card wherever you go
+              </h4>
+              <p class="default-text">
+                We want you to enjoy your travels. This is why we don’t charge
+                any fees on purchases while you’re abroad. We’ll even show you
+              </p>
+            </div>
+          </a>
 
-          <article class="article-container">
+          <a href="#" class="article-container default-link">
             <img src="./images/image-confetti.jpg" alt="Image Confetti" />
-            <span class="default-text text-sm">By Claire Robinson</span>
-            <h4 class="heading heading-sm">
-              Our invite-only Beta accounts are now live!
-            </h4>
-            <p class="default-text">
-              After a lot of hard work by the whole team, we’re excited to
-              launch our closed beta. It’s easy to request an invite through the
-              site ...
-            </p>
-          </article>
+            <div class="article-content">
+              <span class="default-text text-sm">By Claire Robinson</span>
+              <h4 class="heading heading-sm">
+                Our invite-only Beta accounts are now live!
+              </h4>
+              <p class="default-text">
+                After a lot of hard work by the whole team, we’re excited to
+                launch our closed beta. It’s easy to request an invite through
+                the site
+              </p>
+            </div>
+          </a>
         </div>
       </section>
     </main>
+
     <footer class="footer">
-      <img src="./images/logo-light.svg" alt="DigitalBank Logo" />
-      <nav aria-label="Social Medias">
-        <ul class="flex default-list social-media__list">
-          <li class="social-media__item">
-            <a href="#" class="default-link social-media__link"
-              ><img src="./images/icon-facebook.svg" alt="Facebook" class="default-icon"
-            /></a>
-          </li>
+      <div class="footer-left">
+        <a href="#inicio" class="default-link"
+          ><img
+            class="footer-logo"
+            src="./images/logo-light.svg"
+            alt="DigitalBank Logo"
+        /></a>
 
-          <li class="social-media__item">
-            <a href="#" class="default-link social-media__link"
-              ><img
-                src="./images/icon-youtube.svg"
-                alt="Youtube"
-                class="default-icon"
-            /></a>
-          </li>
+        <nav class="social-media__nav" aria-label="Social Medias">
+          <ul class="flex default-list social-media__list">
+            <li class="social-media__item">
+              <a href="#" class="default-link social-media__link"
+                ><img
+                  src="./images/icon-facebook.svg"
+                  alt="Facebook"
+                  class="default-icon"
+              /></a>
+            </li>
 
-          <li class="social-media__item">
-            <a href="#" class="default-link social-media__link"
-              ><img
-                src="./images/icon-twitter.svg"
-                alt="Twitter"
-                class="default-icon"
-            /></a>
-          </li>
+            <li class="social-media__item">
+              <a href="#" class="default-link social-media__link"
+                ><img
+                  src="./images/icon-youtube.svg"
+                  alt="Youtube"
+                  class="default-icon"
+              /></a>
+            </li>
 
-          <li class="social-media__item">
-            <a href="#" class="default-link social-media__link"
-              ><img
-                src="./images/icon-pinterest.svg"
-                alt="Pinterest"
-                class="default-icon"
-            /></a>
-          </li>
+            <li class="social-media__item">
+              <a href="#" class="default-link social-media__link"
+                ><img
+                  src="./images/icon-twitter.svg"
+                  alt="Twitter"
+                  class="default-icon"
+              /></a>
+            </li>
 
-          <li class="social-media__item">
-            <a href="#" class="default-link social-media__link"
-              ><img
-                src="./images/icon-instagram.svg"
-                alt="Instagram"
-                class="default-icon"
-            /></a>
-          </li>
-        </ul>
-      </nav>
+            <li class="social-media__item">
+              <a href="#" class="default-link social-media__link"
+                ><img
+                  src="./images/icon-pinterest.svg"
+                  alt="Pinterest"
+                  class="default-icon"
+              /></a>
+            </li>
 
-      <nav class="footer-nav">
+            <li class="social-media__item">
+              <a href="#" class="default-link social-media__link"
+                ><img
+                  src="./images/icon-instagram.svg"
+                  alt="Instagram"
+                  class="default-icon"
+              /></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <nav class="footer-nav left">
         <ul class="default-list footer-nav__list">
           <li class="footer-nav__item">
             <a href="#" class="default-link footer-nav__link">About Us</a>
@@ -236,8 +293,13 @@
           </li>
         </ul>
       </nav>
-      <button class="gradient-btn">Request Invite</button>
-      Coded by <a href="https://www.diasphilippe.dev.br/">Philippe Dias</a>.
+      <div class="right">
+        <button class="gradient-btn">Request Invite</button>
+        <address class="attribution">
+          Coded by
+          <a href="https://www.diasphilippe.dev.br/">Philippe Dias</a>.
+        </address>
+      </div>
     </footer>
   </body>
 </html>
