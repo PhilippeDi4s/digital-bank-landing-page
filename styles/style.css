@@ -48,32 +48,22 @@
   --hover-lift: -2px;
 }
 
-/* ============= ANIMAÇÕES =============*/
-
 body {
   font-family: "Public Sans", sans-serif;
   background-color: var(--white);
-  max-width: 2300px;
-  margin: 0 auto;
   overflow-x: hidden;
 }
 
+/* ============= UTILITÁRIOS =============*/
 .show-lg {
   display: none;
-}
-
-.right {
-  margin-left: auto;
-}
-
-.left {
-  margin-right: auto;
 }
 
 .flex {
   display: flex;
 }
 
+/* ============= HEADING =============*/
 .heading {
   color: var(--blue-950);
   font-weight: normal;
@@ -81,51 +71,70 @@ body {
 }
 
 .heading-xl {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, calc(1.5455rem + 2.2727vw), 3.5rem);
 }
 
 .heading-lg {
-  font-size: 1.8rem;
+  font-size: clamp(1.7rem, calc(1.4818rem + 1.5909vw), 2.5rem);
 }
 
 .heading-md {
-  font-size: 1.4rem;
+  font-size: clamp(1.3rem, calc(1.1857rem + 1.0714vw), 1.7rem);
 }
 
 .heading-sm {
-  font-size: 1.2rem;
+  font-size: clamp(1.1rem, calc(1.0571rem + 0.7143vw), 1rem);
 }
 
+/* ============= TEXT =============*/
 .default-text {
   color: var(--gray-600);
-  font-size: 0.9rem;
   line-height: 27px;
 }
 
+.text-compact {
+  line-height: 1.4;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-lg {
+  font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.3rem);
+}
+
+.text-md {
+  font-size: clamp(0.9rem, 0.82rem + 0.3vw, 1rem);
+}
+
+.text-sm {
+  font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
+}
+
+.text-xs {
+  font-size: clamp(0.7rem, 0.65rem + 0.15vw, 0.8rem);
+}
+
+/* ============= LIST =============*/
 .default-list {
   list-style: none;
   display: flex;
   flex-direction: column;
 }
 
+/* ============= LINK =============*/
 .default-link {
   text-decoration: none;
   color: inherit;
 }
 
+/* ============= ICON =============*/
 .default-icon {
   transition: transform var(--duration-fast) ease-in-out;
   &:hover {
     transform: translateY(var(--hover-lift)) scale(1.1);
   }
-}
-
-.text-sm {
-  font-size: 0.7rem !important;
-}
-
-.text-center {
-  text-align: center;
 }
 
 .default-btn {
@@ -158,6 +167,15 @@ body {
     background-position: 0 100%;
     transform: translateY(-1.5px);
   }
+}
+
+.content-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xs);
 }
 
 /* ============= HEADER =============*/
@@ -214,7 +232,6 @@ body {
 }
 
 /* ============= SECTIONS =============*/
-
 .even_section {
   background-color: var(--white);
 }
@@ -227,29 +244,36 @@ body {
   display: flex;
   flex-direction: column;
   padding: var(--spacing-sm);
+  min-height: clamp(500px, 80vh, 850px);
+  max-width: 2400px;
+  margin: 0 auto;
 }
 
+/* ============= HERO =============*/
 .hero_section {
+  position: relative;
+  overflow: visible;
   background-image: url(../images/bg-intro-mobile.svg);
   background-repeat: no-repeat;
-  background-size: 100% 80%;
+  background-size: contain;
+  background-position: 0 -20%;
 }
 
 .hero_bg {
   width: 100%;
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  top: -20%;
 
   img {
-    max-width: 100%;
+    width: clamp(20rem, 100vw, 60rem);
   }
 }
 
-.content-block {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: var(--spacing-xs);
+.hero-content {
+  position: relative;
+  margin-top: clamp(10rem, 90vw, 41rem);
 }
 
 .benefits-section {
@@ -341,6 +365,11 @@ body {
   }
 }
 
+.footer-content__left,
+.footer-content__right {
+  gap: 2rem;
+}
+
 /* ============= ATRIBUIÇÃO =============*/
 .attribution {
   font-size: 0.6875rem;
@@ -352,27 +381,6 @@ body {
 
 /* ============= TABLET =============*/
 @media (min-width: 48rem) {
-  .heading-xl {
-    font-size: 2.8rem;
-  }
-
-  .heading-lg {
-    font-size: 2.2rem;
-  }
-
-  .heading-md {
-    font-size: 1.7rem;
-  }
-
-  .heading-sm {
-    font-size: 1.4rem;
-  }
-
-  .default-text {
-    color: var(--gray-600);
-    font-size: 1.3rem;
-  }
-
   .default_section {
     padding: var(--spacing-xl);
   }
@@ -413,6 +421,10 @@ body {
     }
   }
 
+  .hero_bg {
+    /* transform: translateY(-40%); */
+  }
+
   .benefits-section {
     gap: var(--spacing-xl);
   }
@@ -424,27 +436,13 @@ body {
 
 /* ============= DESKTOP =============*/
 @media (min-width: 64rem) {
+  /* ============= UTILITÁRIOS =============*/
+
   .hidden-lg {
     display: none;
   }
   .show-lg {
     display: block;
-  }
-
-  .heading-xl {
-    font-size: 3.5rem;
-  }
-
-  .heading-lg {
-    font-size: 2.5rem;
-  }
-
-  .heading-md {
-    font-size: 1.4rem;
-  }
-
-  .heading-sm {
-    font-size: 1.1rem;
   }
 
   .content-block {
@@ -453,24 +451,16 @@ body {
     gap: var(--spacing-sm);
   }
 
-  .default-text {
-    font-size: 1.2rem;
-  }
-
   .default_section {
-    padding: var(--spacing-xl) 6rem;
-    height: 76vh;
-    max-height: 630px;
+    padding: var(--spacing-xl) clamp(6rem, 10vw, 15rem);
+    gap: 1.4rem;
   }
 
   .gradient-btn {
     font-size: 1rem;
     padding: 0.6rem 1.5rem;
   }
-
-  .text-sm {
-    font-size: 0.8rem !important;
-  }
+  /* ============= HEADER =============*/
 
   .header {
     padding: var(--spacing-md) var(--spacing-2xl);
@@ -522,30 +512,34 @@ body {
     opacity: 1;
   }
 
+  /* ============= HERO =============*/
   .hero_section {
     flex-direction: row-reverse;
     gap: var(--spacing-2xl);
     justify-content: start;
     justify-content: space-between;
     background-image: url(../images/bg-intro-desktop.svg);
-    background-position: 220% 50%;
-    background-size: 80% 190%;
-    padding-bottom: var(--spacing-2xl);
+    background-position: 40rem 60%;
+    background-size: cover;
   }
 
   .hero_bg {
-    position: relative;
+    top: 0;
+    transform: translateX(clamp(10rem, 59vw, 80rem))
+      translateY(-35%);
 
     img {
-      width: 46rem;
-      max-width: none;
-      position: absolute;
-      z-index: 1;
-      right: -11.5rem;
-      top: -15rem;
+      width: auto;
+      height: clamp(45rem, 120vh, 80rem);
     }
   }
 
+  .hero-content {
+    margin-top: 0;
+    max-width: 33rem;
+    margin-right: auto;
+  }
+  /* ============= BENEFITS =============*/
   .benefits-section {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -555,25 +549,22 @@ body {
     img {
       width: 5rem;
     }
-
-    .default-text {
-      font-size: 1rem;
-    }
   }
 
   #benefits-section_introduction {
     grid-column: 1/4;
   }
 
+  /* ============= ARTICLES =============*/
+
+  .article-section > .heading {
+    text-align: start;
+  }
+
   .articles-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: stretch;
-
-    .default-text {
-      font-size: 0.9rem;
-      line-height: 20px;
-    }
   }
 
   .article-container img {
@@ -581,16 +572,19 @@ body {
     height: 14rem;
   }
 
+  /* ============= FOOTER =============*/
   .footer {
     flex-direction: row;
     padding: var(--spacing-md) var(--spacing-2xl);
+  }
 
-    .footer-left,
-    .right {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-lg);
-    }
+  .footer-content__left,
+  .footer-content__right {
+    gap: var(--spacing-lg);
+  }
+
+  .footer-content__right {
+    margin-left: auto;
   }
 
   .footer-nav__list {
