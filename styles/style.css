@@ -101,19 +101,19 @@ body {
 }
 
 .text-lg {
-  font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.3rem);
+  font-size: clamp(1rem, 0.85rem + 0.9vw, 1.35rem);
 }
 
 .text-md {
-  font-size: clamp(0.9rem, 0.82rem + 0.3vw, 1rem);
+  font-size: clamp(0.95rem, 0.82rem + 0.6vw, 1.1rem);
 }
 
 .text-sm {
-  font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
+  font-size: clamp(0.85rem, 0.76rem + 0.35vw, 0.95rem);
 }
 
 .text-xs {
-  font-size: clamp(0.7rem, 0.65rem + 0.15vw, 0.8rem);
+  font-size: clamp(0.75rem, 0.68rem + 0.25vw, 0.85rem);
 }
 
 /* ============= LIST =============*/
@@ -167,6 +167,25 @@ body {
     background-position: 0 100%;
     transform: translateY(-1.5px);
   }
+}
+
+/* ============= SECTIONS =============*/
+.even_section {
+  background-color: var(--white);
+}
+
+.odd_section {
+  background-color: var(--gray-100);
+}
+
+.default_section {
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(500px, 80vh, 850px);
+  max-width: 2400px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 30vh, 3rem) clamp(var(--spacing-xs), 10vw, var(--spacing-2xl));
+  gap: clamp(0rem, 20vw, 1.5rem);
 }
 
 .content-block {
@@ -231,24 +250,6 @@ body {
   }
 }
 
-/* ============= SECTIONS =============*/
-.even_section {
-  background-color: var(--white);
-}
-
-.odd_section {
-  background-color: var(--gray-100);
-}
-
-.default_section {
-  display: flex;
-  flex-direction: column;
-  padding: var(--spacing-sm);
-  min-height: clamp(500px, 80vh, 850px);
-  max-width: 2400px;
-  margin: 0 auto;
-}
-
 /* ============= HERO =============*/
 .hero_section {
   position: relative;
@@ -273,7 +274,7 @@ body {
 
 .hero-content {
   position: relative;
-  margin-top: clamp(10rem, 90vw, 41rem);
+  margin-top: clamp(10rem, 90vw, 50rem);
 }
 
 .benefits-section {
@@ -381,10 +382,6 @@ body {
 
 /* ============= TABLET =============*/
 @media (min-width: 48rem) {
-  .default_section {
-    padding: var(--spacing-xl);
-  }
-
   .default-btn {
     font-size: 1.1rem;
   }
@@ -422,7 +419,7 @@ body {
   }
 
   .hero_bg {
-    /* transform: translateY(-40%); */
+    transform: translateY(-7%);
   }
 
   .benefits-section {
@@ -437,7 +434,6 @@ body {
 /* ============= DESKTOP =============*/
 @media (min-width: 64rem) {
   /* ============= UTILITÁRIOS =============*/
-
   .hidden-lg {
     display: none;
   }
@@ -449,11 +445,6 @@ body {
     text-align: start;
     align-items: start;
     gap: var(--spacing-sm);
-  }
-
-  .default_section {
-    padding: var(--spacing-xl) clamp(6rem, 10vw, 15rem);
-    gap: 1.4rem;
   }
 
   .gradient-btn {
@@ -525,8 +516,7 @@ body {
 
   .hero_bg {
     top: 0;
-    transform: translateX(clamp(10rem, 59vw, 80rem))
-      translateY(-35%);
+    transform: translateX(clamp(10rem, 59vw, 80rem)) translateY(-35%);
 
     img {
       width: auto;
@@ -553,6 +543,7 @@ body {
 
   #benefits-section_introduction {
     grid-column: 1/4;
+    max-width: 62rem;
   }
 
   /* ============= ARTICLES =============*/
