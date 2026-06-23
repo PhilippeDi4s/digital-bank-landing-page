@@ -30,42 +30,40 @@
           id="logoImage"
         />
       </a>
-      <button type="button" class="default-btn header-menu__btn hidden-lg">
-        <svg
-          class="header-menu__icon"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          aria-label="Menu"
-        >
-          <path
-            d="M2 8h20M2 12h20M2 16h20"
-            stroke="currentColor"
-            stroke-width="1.2"
-            stroke-linecap="round"
-          />
-        </svg>
+
+      <button
+        type="button"
+        class="header-menu__btn hidden-lg"
+        id="menuBtn"
+        aria-label="Abrir menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
 
-      <nav class="header-menu__nav" id="headerMenu">
-        <ul class="header-menu__list default-list">
-          <li class="header-menu__item">
-            <a href="#" class="header-menu__link default-link">Home</a>
-          </li>
-          <li class="header-menu__item">
-            <a href="#" class="header-menu__link default-link">About</a>
-          </li>
-          <li class="header-menu__item">
-            <a href="#" class="header-menu__link default-link">Contact</a>
-          </li>
-          <li class="header-menu__item">
-            <a href="#" class="header-menu__link default-link">Blog</a>
-          </li>
-          <li class="header-menu__item">
-            <a href="#" class="header-menu__link default-link">Careers</a>
-          </li>
-        </ul>
-      </nav>
+      <div class="overlay">
+        <nav class="header-menu__nav" id="headerMenu">
+          <ul class="header-menu__list default-list">
+            <li class="header-menu__item">
+              <a href="#" class="header-menu__link default-link">Home</a>
+            </li>
+            <li class="header-menu__item">
+              <a href="#" class="header-menu__link default-link">About</a>
+            </li>
+            <li class="header-menu__item">
+              <a href="#" class="header-menu__link default-link">Contact</a>
+            </li>
+            <li class="header-menu__item">
+              <a href="#" class="header-menu__link default-link">Blog</a>
+            </li>
+            <li class="header-menu__item">
+              <a href="#" class="header-menu__link default-link">Careers</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
       <button class="default-btn gradient-btn show-lg">Request Invite</button>
     </header>
 
@@ -300,5 +298,6 @@
         </address>
       </div>
     </footer>
+    <script src="./script/toggleMenu.js"></script>
   </body>
 </html>

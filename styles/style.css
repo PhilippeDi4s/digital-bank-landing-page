@@ -63,6 +63,38 @@ body {
   display: flex;
 }
 
+.no-scroll {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  transform: translateY(4rem);
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay.active .header-menu__nav {
+  top: 2rem;
+}
+
+.header:has(.overlay.active) .header-menu__btn {
+  color: var(--green-600);
+}
+
 /* ============= HEADING =============*/
 .heading {
   color: var(--blue-950);
@@ -141,7 +173,7 @@ body {
   background-color: transparent;
   cursor: pointer;
   border: none;
-
+  white-space: nowrap;
   &:hover {
     transform: translateY(var(--hover-lift));
     filter: brightness(102%);
@@ -184,7 +216,8 @@ body {
   min-height: clamp(500px, 80vh, 850px);
   max-width: 2400px;
   margin: 0 auto;
-  padding: clamp(1.5rem, 30vh, 3rem) clamp(var(--spacing-xs), 10vw, var(--spacing-2xl));
+  padding: clamp(1.5rem, 30vh, 3rem)
+    clamp(var(--spacing-xs), 10vw, var(--spacing-2xl));
   gap: clamp(0rem, 20vw, 1.5rem);
 }
 
@@ -200,29 +233,66 @@ body {
 /* ============= HEADER =============*/
 .header {
   position: sticky;
-  z-index: 2;
+  z-index: 3;
   inset: 0;
   overflow: hidden;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 3rem;
   padding: 1.3rem;
   background-color: var(--white);
 }
 
 .header-menu__btn {
-  transition: all var(--duration-slow) ease-in-out;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
 
-  &:hover {
-    transform: rotateZ(30deg);
-    color: var(--green-600);
-  }
+.header-menu__btn span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+.header-menu__btn span:nth-child(1) {
+  top: 5px;
+}
+
+.header-menu__btn span:nth-child(2) {
+  top: 11px;
+}
+
+.header-menu__btn span:nth-child(3) {
+  top: 17px;
+}
+
+.header-menu__btn.active span:nth-child(1) {
+  top: 11px;
+  transform: rotate(45deg);
+}
+
+.header-menu__btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.header-menu__btn.active span:nth-child(3) {
+  top: 11px;
+  transform: rotate(-45deg);
 }
 
 .header-menu__nav {
   position: absolute;
-  top: -100rem; /*5rem*/
+  top: -100rem;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--white);
@@ -516,7 +586,7 @@ body {
 
   .hero_bg {
     top: 0;
-    transform: translateX(clamp(10rem, 59vw, 80rem)) translateY(-35%);
+    transform: translateX(clamp(10rem, 56vw, 80rem)) translateY(-35%);
 
     img {
       width: auto;
@@ -526,7 +596,7 @@ body {
 
   .hero-content {
     margin-top: 0;
-    max-width: 33rem;
+    max-width: clamp(30rem, 40vw, 35rem);
     margin-right: auto;
   }
   /* ============= BENEFITS =============*/
