@@ -25,7 +25,7 @@
   --cyan-950: hsl(192, 60%, 12%);
 
   --gray-600: hsl(236, 6%, 40%);
-  --gray-100: hsl(220, 16%, 96%);
+  --gray-100: #f3f4f6;
   --gray-50: hsl(0, 0%, 98%);
   --white: hsl(0, 100%, 100%);
 
@@ -51,7 +51,7 @@
 body {
   font-family: "Public Sans", sans-serif;
   background-color: var(--white);
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 
 img {
@@ -69,13 +69,13 @@ img {
   }
 }
 
-@keyframes float-centered {
+@keyframes gradient-shift {
   0%,
   100% {
-    transform: translateX(-50%) translateY(0);
+    transform: translate(0, 0) rotate(0deg);
   }
   50% {
-    transform: translateX(-50%) translateY(-16px);
+    transform: translate(-10%, 10%) rotate(8deg);
   }
 }
 
@@ -255,6 +255,28 @@ img {
   gap: var(--spacing-xs);
 }
 
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(2.25rem);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ============= HEADER =============*/
 .header {
   position: sticky;
@@ -268,6 +290,7 @@ img {
   gap: 3rem;
   padding: 1.3rem;
   background-color: var(--white);
+  transition: opacity 0.5s ease-in-out;
 }
 
 .header-menu__btn {
@@ -348,11 +371,16 @@ img {
 /* ============= HERO =============*/
 .hero_section {
   position: relative;
-  overflow: visible;
+  z-index: 1;
+  overflow: hidden;
   background-image: url(../assets/images/bg-intro-mobile.svg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 0 -5%;
+}
+
+body:has(.hero_section.is-phone-zooming) .header {
+  opacity: 0;
 }
 
 .hero_bg {
@@ -361,12 +389,14 @@ img {
   z-index: 1;
   inset: 0;
   top: -6rem;
+  will-change: transform;
+
+  animation: float 4.6s ease-in-out infinite;
 
   img {
     width: 7.5rem;
     position: absolute;
     inset: 0;
-    animation: float 6s ease-in-out infinite;
   }
 }
 
@@ -378,8 +408,6 @@ img {
 #cellphone-left {
   right: auto;
   left: 0.5rem;
-  animation-duration: 5s;
-  animation-delay: 0s;
 }
 
 #cellphone-right {
@@ -389,19 +417,63 @@ img {
   animation-delay: 1s;
 }
 
-#cellphone-top,
-#cellphone-bottom {
+#cellphone-top {
   left: 50%;
   transform: translateX(-50%);
-  animation-name: float-centered;
-  animation-duration: 7s;
-  animation-delay: 0.5s;
 }
 
 #cellphone-bottom {
+  position: relative;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.phone-zoom-position {
+  position: absolute;
   top: 15rem;
-  animation-duration: 5.5s;
-  animation-delay: 1.5s;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  will-change: transform;
+}
+
+.phone-zoom-wrapper {
+  position: relative;
+  transform-origin: 50% 58%;
+  isolation: isolate;
+  will-change: transform;
+}
+
+.phone-zoom-gradient {
+  position: absolute;
+  top: 3%;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 3;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.phone-zoom-gradient::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(135deg, #1ed79e, #1aa3e0, #1ed79e);
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+.phone-zoom-wrapper .phone-zoom-logo {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6rem;
 }
 
 .hero-content {
@@ -409,8 +481,26 @@ img {
   margin-top: clamp(10rem, 90vw, 50rem);
 }
 
+/* ============= HERO =============*/
+
 .benefits-section {
+  position: relative;
   gap: var(--spacing-md);
+}
+
+.benefits-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(5rem, 14vw, 10rem);
+  pointer-events: none;
+}
+
+.benefits-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ============= ARTICLES =============*/
@@ -654,6 +744,14 @@ img {
       width: auto;
       height: clamp(45rem, 120vh, 80rem);
     }
+  }
+
+  .phone-zoom-position {
+    top: clamp(16rem, 30vh, 24rem);
+  }
+
+  .phone-zoom-gradient {
+    border-radius: 28px;
   }
 
   .hero-content {
