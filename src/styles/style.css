@@ -128,11 +128,11 @@ img {
 }
 
 .heading-xl {
-  font-size: clamp(2rem, calc(1.5455rem + 2.2727vw), 3.5rem);
+  font-size: clamp(1.7rem, calc(1.0455rem + 2.2727vw), 3.5rem);
 }
 
 .heading-lg {
-  font-size: clamp(1.7rem, calc(1.4818rem + 1.5909vw), 2.5rem);
+  font-size: clamp(1.5rem, calc(1.4818rem + 1.5909vw), 2.5rem);
 }
 
 .heading-md {
@@ -241,9 +241,9 @@ img {
   min-height: clamp(500px, 80vh, 850px);
   max-width: 2400px;
   margin: 0 auto;
-  padding: clamp(1.5rem, 30vh, 3rem)
+  padding: clamp(1rem, 5vh, 3rem)
     clamp(var(--spacing-xs), 10vw, var(--spacing-2xl));
-  gap: clamp(0rem, 20vw, 1.5rem);
+  gap: clamp(0rem, 15vw, 1.5rem);
 }
 
 .content-block {
@@ -283,7 +283,6 @@ img {
   z-index: 3;
   inset: 0;
   overflow: hidden;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -370,13 +369,11 @@ img {
 
 /* ============= HERO =============*/
 .hero_section {
+  padding-top: 0;
+  padding-bottom: 0;
   position: relative;
   z-index: 1;
-  overflow: hidden;
-  background-image: url(../assets/images/bg-intro-mobile.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: 0 -5%;
+  --mobile-fluid: clamp(0, calc((100vw - 20rem) / 28rem), 1);
 }
 
 body:has(.hero_section.is-phone-zooming) .header {
@@ -384,17 +381,39 @@ body:has(.hero_section.is-phone-zooming) .header {
 }
 
 .hero_bg {
-  width: 100%;
   position: absolute;
-  z-index: 1;
   inset: 0;
-  top: -6rem;
-  will-change: transform;
+  z-index: 1;
+}
 
+.hero_bg_image {
+  position: absolute;
+
+  width: calc(110vw - var(--mobile-fluid) * 5vw);
+
+  max-width: none;
+  height: auto;
+
+  right: 0;
+
+  top: calc(-5rem - var(--mobile-fluid) * 12rem);
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero__phones {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  top: calc(-8rem - (8.5rem * 0.1) * var(--mobile-fluid));
+  will-change: transform;
   animation: float 4.6s ease-in-out infinite;
+  max-width: 40rem;
+  margin: 0 auto;
 
   img {
-    width: 7.5rem;
+    width: calc(6rem + var(--mobile-fluid) * 6rem);
     position: absolute;
     inset: 0;
   }
@@ -407,19 +426,16 @@ body:has(.hero_section.is-phone-zooming) .header {
 
 #cellphone-left {
   right: auto;
-  left: 0.5rem;
 }
 
 #cellphone-right {
   left: auto;
-  right: 0.5rem;
-  animation-duration: 6s;
-  animation-delay: 1s;
 }
 
 #cellphone-top {
+  top: calc(1rem - 7.5rem * var(--mobile-fluid));
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) !important;
 }
 
 #cellphone-bottom {
@@ -431,7 +447,7 @@ body:has(.hero_section.is-phone-zooming) .header {
 
 .phone-zoom-position {
   position: absolute;
-  top: 15rem;
+  top: calc(13.04rem + var(--mobile-fluid) * 4rem);
   left: 50%;
   z-index: 2;
   transform: translateX(-50%);
@@ -472,17 +488,15 @@ body:has(.hero_section.is-phone-zooming) .header {
   z-index: 4;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 6rem;
+  width: clamp(5rem, calc(4rem + 5vw), 6rem);
 }
 
 .hero-content {
   position: relative;
-  margin-top: clamp(10rem, 90vw, 50rem);
+  margin-top: calc(17rem + var(--mobile-fluid) * 19rem);
 }
 
-/* ============= HERO =============*/
-
+/* ============= BENEFITS =============*/
 .benefits-section {
   position: relative;
   gap: var(--spacing-md);
@@ -604,6 +618,14 @@ body:has(.hero_section.is-phone-zooming) .header {
 
 /* ============= TABLET =============*/
 @media (min-width: 48rem) {
+  .overlay {
+    transform: translateY(6.5rem);
+  }
+
+  .header-menu__btn {
+    width: 2.5rem;
+  }
+
   .default-btn {
     font-size: 1.1rem;
   }
@@ -640,9 +662,47 @@ body:has(.hero_section.is-phone-zooming) .header {
     }
   }
 
-  .hero_bg {
-    transform: translateY(-7%);
+  .hero_section {
+    --mobile-fluid: calc(1 + clamp(0, calc((100vw - 48rem) / 16rem), 1));
   }
+
+  .hero__phones {
+    max-width: 50rem;
+  }
+
+  /* 
+  .hero_bg {
+    max-width: none;
+    img {
+      width: 14.5rem;
+    }
+  }
+
+  .hero_bg {
+    background-size: contain;
+    background-position: 100% 10%;
+    margin: 0 auto;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    top: clamp(-12rem, calc(-20rem + 40vw), -8rem);
+    will-change: transform;
+
+    img {
+      width: calc(6rem + var(--mobile-fluid) * 1.5rem);
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  #cellphone-top {
+    top: -8rem;
+  }
+
+  .phone-zoom-position {
+    top: 22rem;
+  } */
 
   .benefits-section {
     gap: var(--spacing-xl);
