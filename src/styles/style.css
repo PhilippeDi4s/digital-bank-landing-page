@@ -797,7 +797,7 @@ body:has(.hero_section.is-phone-zooming) .header {
   
 
   .phone-zoom-gradient {
-    border-radius: 28px;
+    border-radius: 24px;
   }
   /* ============= BENEFITS =============*/
   .benefits-section {
