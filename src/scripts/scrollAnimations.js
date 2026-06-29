@@ -269,4 +269,29 @@ if (
       };
     },
   );
+  // ---------------------------------------------------------------------
+  // Segurança contra troca de tamanho de tela
+  // ---------------------------------------------------------------------
+
+  function refreshHeroAnimation() {
+    if (typeof setZoomOrigin === "function") {
+      setZoomOrigin();
+    }
+    ScrollTrigger.refresh();
+  }
+
+  let refreshFrame;
+  function scheduleHeroRefresh() {
+
+    if (refreshFrame) cancelAnimationFrame(refreshFrame);
+    refreshFrame = requestAnimationFrame(refreshHeroAnimation);
+  }
+
+  window.addEventListener("resize", scheduleHeroRefresh);
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", scheduleHeroRefresh);
+  }
+
+  window.addEventListener("focus", scheduleHeroRefresh);
 }
