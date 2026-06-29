@@ -185,7 +185,6 @@ if (
 
       // ---------------------------------------------------------------
       // MOBILE e TABLET — celular permanece vertical e só cresce
-      // (tablet recebe tempos mais longos pra dar espaço de leitura)
       // ---------------------------------------------------------------
       const contentReadDuration = isTablet ? 0.42 : 0.24;
       const zoomStart = isTablet ? 0.5 : 0.28;
@@ -195,7 +194,7 @@ if (
         scrollTrigger: {
           trigger: heroSection,
           start: "top top",
-          end: () => "+=" + heroSection.offsetHeight,
+          end: () => "+=" + heroSection.offsetHeight * 0.5,
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -241,7 +240,7 @@ if (
           {
             x: () => -getPhoneWidth() * -1,
             scale: () => (window.innerWidth / phoneLogo.offsetWidth) * 1.5,
-            duration: 0.72,
+            duration: 1.3,
             ease: "power1.inOut",
           },
           zoomStart,

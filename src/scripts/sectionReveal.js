@@ -17,12 +17,6 @@ function createRevealObserver(elements, observerOptions, groupSelector) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-
-      // Por padrão, o "grupo" de delay é a section/footer inteira.
-      // Se um groupSelector for passado, o delay é calculado dentro
-      // do grupo mais próximo que casar com ele — isso evita que um
-      // bloco independente (ex: footer-content__right) acumule o
-      // delay de TODOS os itens que vieram antes dele no DOM.
       const group = groupSelector
         ? (entry.target.closest(groupSelector) ??
           entry.target.closest("section, footer") ??
@@ -51,9 +45,6 @@ function createRevealObserver(elements, observerOptions, groupSelector) {
   elements.forEach((element) => observer.observe(element));
 }
 
-// Seções "normais" — sempre têm conteúdo abaixo, então a margem
-// negativa de baixo (-12%) funciona bem, dando tempo do elemento
-// subir suavemente antes de revelar.
 const regularRevealGroups = [
   ".benefits-section .content-block",
   ".article-section > .heading",
@@ -65,10 +56,6 @@ createRevealObserver(gsap.utils.toArray(regularRevealGroups.join(", ")), {
   rootMargin: "0px 0px -12% 0px",
 });
 
-// Footer — é a ÚLTIMA seção da página, não existe scroll restante
-// abaixo dela. Por isso usa threshold/rootMargin bem mais permissivos,
-// sem a margem negativa (que cortaria os itens mais perto do fim real
-// do documento, impedindo-os de jamais atingir o ratio mínimo).
 const footerRevealGroups = [
   ".footer-content__left",
   ".footer-nav__item",
