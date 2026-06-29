@@ -369,6 +369,7 @@ img {
 
 /* ============= HERO =============*/
 .hero_section {
+  min-height: 100vh;
   padding-top: 0;
   padding-bottom: 0;
   position: relative;
@@ -405,7 +406,7 @@ body:has(.hero_section.is-phone-zooming) .header {
 .hero__phones {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 20;
   top: calc(-8rem - (8.5rem * 0.1) * var(--fluid));
   will-change: transform;
   animation: float 4.6s ease-in-out infinite;

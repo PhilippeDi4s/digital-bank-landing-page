@@ -239,8 +239,8 @@ if (
         .to(
           phoneLogo,
           {
-            x: () => -getPhoneWidth() * 0.32,
-            scale: () => (window.innerWidth / phoneLogo.offsetWidth) * 1.4,
+            x: () => -getPhoneWidth() * -1,
+            scale: () => (window.innerWidth / phoneLogo.offsetWidth) * 1.5,
             duration: 0.72,
             ease: "power1.inOut",
           },
@@ -270,54 +270,4 @@ if (
       };
     },
   );
-}
-
-// ---------------------------------------------------------------------
-// Reveal genérico de seções ao entrar na viewport (sem mudanças)
-// ---------------------------------------------------------------------
-const revealGroups = [
-  ".benefits-section .content-block",
-  ".article-section > .heading",
-  ".article-container",
-  ".footer-content__left",
-  ".footer-nav__item",
-  ".footer-content__right",
-];
-
-const revealElements = gsap.utils.toArray(revealGroups.join(", "));
-
-if (revealElements.length) {
-  revealElements.forEach((element) => {
-    element.classList.add("scroll-reveal");
-  });
-
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        const section =
-          entry.target.closest("section, footer") ?? document.body;
-        const sectionItems = revealElements.filter((element) => {
-          return (
-            (element.closest("section, footer") ?? document.body) === section
-          );
-        });
-        const index = sectionItems.indexOf(entry.target);
-
-        entry.target.style.setProperty(
-          "--reveal-delay",
-          `${Math.max(index, 0) * 120}ms`,
-        );
-        entry.target.classList.add("is-visible");
-        revealObserver.unobserve(entry.target);
-      });
-    },
-    {
-      threshold: 0.22,
-      rootMargin: "0px 0px -12% 0px",
-    },
-  );
-
-  revealElements.forEach((element) => revealObserver.observe(element));
 }
