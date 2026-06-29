@@ -112,24 +112,48 @@ if (
             0.24,
           )
           .to(
-            phonePosition,
+            phoneLogo,
             {
-              x: () => -window.innerWidth * 0.2,
-              y: () => getHeaderOffset() + window.innerHeight * 0.12,
-              scale: () =>
-                Math.max(window.innerWidth / getPhoneWidth(), 1) * 5.8,
+              rotate: -90,
+
+              x: () => -getPhoneWidth() * 0.04,
+              y: -30, // ajuste fino
+
+              scale: () => {
+                const phoneScale = Math.max(
+                  window.innerWidth / phoneWrapper.offsetWidth,
+                  window.innerHeight / phoneWrapper.offsetHeight,
+                );
+
+                return phoneScale * 0.2;
+              },
+
               duration: 0.68,
               ease: "power1.inOut",
             },
             0.46,
           )
-          .to(phoneWrapper, { borderRadius: 0, duration: 0.68 }, 0.46)
-          .to(phoneGradient, { scale: 1.22, duration: 0.68 }, 0.46)
           .to(
-            phoneLogo,
+            phonePosition,
             {
-              x: () => -getPhoneWidth() * 0.32,
-              scale: () => (window.innerWidth / phoneLogo.offsetWidth) * 1.2,
+              x: () => {
+                const rect = phonePosition.getBoundingClientRect();
+                return window.innerWidth / 2 - (rect.left + rect.width / 2);
+              },
+
+              y: () => {
+                const rect = phoneWrapper.getBoundingClientRect();
+
+                return getHeaderOffset() - rect.top;
+              },
+
+              scale: () => {
+                const scaleX = window.innerWidth / phoneWrapper.offsetWidth;
+                const scaleY = window.innerHeight / phoneWrapper.offsetHeight;
+
+                return Math.max(scaleX, scaleY) * 1.05;
+              },
+
               duration: 0.68,
               ease: "power1.inOut",
             },
@@ -166,60 +190,67 @@ if (
       const contentReadDuration = isTablet ? 0.42 : 0.24;
       const zoomStart = isTablet ? 0.5 : 0.28;
       const holdBeforeStart = isTablet ? 0.3 : 0;
-      // const endDistance = isTablet ? "+=120%" : "+=80%";
 
       const timeline = gsap.timeline({
-  scrollTrigger: {
-    trigger: heroSection,
-    start: "top top",
-    end: () => "+=" + heroSection.offsetHeight,
-    scrub: 1,
-    pin: true,
-    anticipatePin: 1,
-    invalidateOnRefresh: true,
-    onEnter: () => heroSection.classList.add("is-phone-zooming"),
-    onEnterBack: () => heroSection.classList.add("is-phone-zooming"),
-    onLeave: () => heroSection.classList.remove("is-phone-zooming"),
-    onLeaveBack: () => heroSection.classList.remove("is-phone-zooming"),
-  },
-});
+        scrollTrigger: {
+          trigger: heroSection,
+          start: "top top",
+          end: () => "+=" + heroSection.offsetHeight,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onEnter: () => heroSection.classList.add("is-phone-zooming"),
+          onEnterBack: () => heroSection.classList.add("is-phone-zooming"),
+          onLeave: () => heroSection.classList.remove("is-phone-zooming"),
+          onLeaveBack: () => heroSection.classList.remove("is-phone-zooming"),
+        },
+      });
 
-timeline
-  .to(phoneParts, {
-    autoAlpha: 0,
-    scale: 0.76,
-    y: -90,
-    duration: 0.18,
-  }, holdBeforeStart)
-  .to(
-    heroContent,
-    { autoAlpha: 0, y: 80, duration: contentReadDuration },
-    holdBeforeStart + 0.08,
-  )
-  .to(
-    phonePosition,
-    {
-      y: () =>
-        -(phonePosition.getBoundingClientRect().top - getHeaderOffset()),
-      scale: () => Math.max(window.innerWidth / getPhoneWidth(), 1) * 7,
-      duration: 0.72,
-      ease: "power1.inOut",
-    },
-    zoomStart,
-  )
-  .to(phoneWrapper, { borderRadius: 0, duration: 0.72 }, zoomStart)
-  .to(phoneGradient, { scale: 1.18, duration: 0.72 }, zoomStart)
-  .to(
-    phoneLogo,
-    {
-      x: () => -getPhoneWidth() * 0.32,
-      scale: () => (window.innerWidth / phoneLogo.offsetWidth) * 1.4,
-      duration: 0.72,
-      ease: "power1.inOut",
-    },
-    zoomStart,
-  )
-  .to(heroBg, { yPercent: -22, duration: 0.28, ease: "power1.in" }, holdBeforeStart + 1.18);
+      timeline
+        .to(
+          phoneParts,
+          {
+            autoAlpha: 0,
+            scale: 0.76,
+            y: -90,
+            duration: 0.18,
+          },
+          holdBeforeStart,
+        )
+        .to(
+          heroContent,
+          { autoAlpha: 0, y: 80, duration: contentReadDuration },
+          holdBeforeStart + 0.08,
+        )
+        .to(
+          phonePosition,
+          {
+            y: () =>
+              -(phonePosition.getBoundingClientRect().top - getHeaderOffset()),
+            scale: () => Math.max(window.innerWidth / getPhoneWidth(), 1) * 7,
+            duration: 0.72,
+            ease: "power1.inOut",
+          },
+          zoomStart,
+        )
+        .to(phoneWrapper, { borderRadius: 0, duration: 0.72 }, zoomStart)
+        .to(phoneGradient, { scale: 1.18, duration: 0.72 }, zoomStart)
+        .to(
+          phoneLogo,
+          {
+            x: () => -getPhoneWidth() * 0.32,
+            scale: () => (window.innerWidth / phoneLogo.offsetWidth) * 1.4,
+            duration: 0.72,
+            ease: "power1.inOut",
+          },
+          zoomStart,
+        )
+        .to(
+          heroBg,
+          { yPercent: -22, duration: 0.28, ease: "power1.in" },
+          holdBeforeStart + 1.18,
+        );
 
       return () => {
         timeline.kill();

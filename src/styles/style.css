@@ -373,7 +373,7 @@ img {
   padding-bottom: 0;
   position: relative;
   z-index: 1;
-  --mobile-fluid: clamp(0, calc((100vw - 20rem) / 28rem), 1);
+  --fluid: clamp(0, calc((100vw - 20rem) / 28rem), 1);
 }
 
 body:has(.hero_section.is-phone-zooming) .header {
@@ -389,14 +389,14 @@ body:has(.hero_section.is-phone-zooming) .header {
 .hero_bg_image {
   position: absolute;
 
-  width: calc(110vw - var(--mobile-fluid) * 5vw);
+  width: calc(110vw - var(--fluid) * 5vw);
 
   max-width: none;
   height: auto;
 
   right: 0;
 
-  top: calc(-5rem - var(--mobile-fluid) * 12rem);
+  top: calc(-5rem - var(--fluid) * 12rem);
 
   pointer-events: none;
   user-select: none;
@@ -406,14 +406,14 @@ body:has(.hero_section.is-phone-zooming) .header {
   position: absolute;
   inset: 0;
   z-index: 2;
-  top: calc(-8rem - (8.5rem * 0.1) * var(--mobile-fluid));
+  top: calc(-8rem - (8.5rem * 0.1) * var(--fluid));
   will-change: transform;
   animation: float 4.6s ease-in-out infinite;
   max-width: 40rem;
   margin: 0 auto;
 
   img {
-    width: calc(6rem + var(--mobile-fluid) * 6rem);
+    width: calc(6rem + var(--fluid) * 6rem);
     position: absolute;
     inset: 0;
   }
@@ -433,7 +433,7 @@ body:has(.hero_section.is-phone-zooming) .header {
 }
 
 #cellphone-top {
-  top: calc(1rem - 7.5rem * var(--mobile-fluid));
+  top: calc(1rem - 7.5rem * var(--fluid));
   left: 50%;
   transform: translateX(-50%) !important;
 }
@@ -447,7 +447,7 @@ body:has(.hero_section.is-phone-zooming) .header {
 
 .phone-zoom-position {
   position: absolute;
-  top: calc(13.04rem + var(--mobile-fluid) * 4rem);
+  top: calc(13.04rem + var(--fluid) * 4rem);
   left: 50%;
   z-index: 2;
   transform: translateX(-50%);
@@ -493,7 +493,7 @@ body:has(.hero_section.is-phone-zooming) .header {
 
 .hero-content {
   position: relative;
-  margin-top: calc(17rem + var(--mobile-fluid) * 19rem);
+  margin-top: calc(17rem + var(--fluid) * 19rem);
 }
 
 /* ============= BENEFITS =============*/
@@ -663,46 +663,12 @@ body:has(.hero_section.is-phone-zooming) .header {
   }
 
   .hero_section {
-    --mobile-fluid: calc(1 + clamp(0, calc((100vw - 48rem) / 16rem), 1));
+    --fluid: calc(1 + clamp(0, calc((100vw - 48rem) / 16rem), 1));
   }
 
   .hero__phones {
     max-width: 50rem;
   }
-
-  /* 
-  .hero_bg {
-    max-width: none;
-    img {
-      width: 14.5rem;
-    }
-  }
-
-  .hero_bg {
-    background-size: contain;
-    background-position: 100% 10%;
-    margin: 0 auto;
-    width: 100%;
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-    top: clamp(-12rem, calc(-20rem + 40vw), -8rem);
-    will-change: transform;
-
-    img {
-      width: calc(6rem + var(--mobile-fluid) * 1.5rem);
-      position: absolute;
-      inset: 0;
-    }
-  }
-
-  #cellphone-top {
-    top: -8rem;
-  }
-
-  .phone-zoom-position {
-    top: 22rem;
-  } */
 
   .benefits-section {
     gap: var(--spacing-xl);
@@ -732,6 +698,10 @@ body:has(.hero_section.is-phone-zooming) .header {
   .gradient-btn {
     font-size: 1rem;
     padding: 0.6rem 1.5rem;
+  }
+
+  .default_section {
+    min-height: 100vh;
   }
   /* ============= HEADER =============*/
 
@@ -787,37 +757,46 @@ body:has(.hero_section.is-phone-zooming) .header {
 
   /* ============= HERO =============*/
   .hero_section {
-    flex-direction: row-reverse;
-    gap: var(--spacing-2xl);
-    justify-content: start;
-    justify-content: space-between;
-    background-image: url(../assets/images/bg-intro-desktop.svg);
-    background-position: 40rem 60%;
-    background-size: cover;
-  }
-
-  .hero_bg {
-    top: 0;
-    transform: translateX(clamp(10rem, 56vw, 80rem)) translateY(-35%);
-
-    img {
-      width: auto;
-      height: clamp(45rem, 120vh, 80rem);
-    }
-  }
-
-  .phone-zoom-position {
-    top: clamp(16rem, 30vh, 24rem);
-  }
-
-  .phone-zoom-gradient {
-    border-radius: 28px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    --desktop-fluid: clamp(0, calc((100vw - 64rem) / 24rem), 1);
   }
 
   .hero-content {
+    width: 60%;
     margin-top: 0;
-    max-width: clamp(30rem, 40vw, 35rem);
-    margin-right: auto;
+  }
+
+  .hero_bg {
+    width: 60%;
+    position: relative;
+    transform: none;
+    overflow: visible;
+  }
+
+  .hero__phones {
+    width: calc(100% + var(--desktop-fluid) * 12rem);
+    top: calc(-44rem + var(--desktop-fluid) * 10rem);
+    left: calc(2rem + var(--desktop-fluid) * 6rem);
+
+    img {
+      width: calc(10rem + var(--desktop-fluid) * 4rem);
+    }
+  }
+
+  #cellphone-top {
+    top: calc(-11rem + var(--desktop-fluid) * 5rem);
+  }
+
+  .phone-zoom-position {
+    top: calc(16rem + var(--desktop-fluid) * 8rem);
+  }
+
+  
+
+  .phone-zoom-gradient {
+    border-radius: 28px;
   }
   /* ============= BENEFITS =============*/
   .benefits-section {
